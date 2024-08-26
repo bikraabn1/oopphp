@@ -37,7 +37,7 @@ class Dosen{
     }
 
     // Metode untuk menampilkan data dosen dalam format string
-    public function tampilkanData(){
+    public function tampilkanDosen(){
         return "NAMA : $this->nama, NIP : $this->nip, MATA KULIAH : $this->matkul";
     }
 }
@@ -59,4 +59,4 @@ echo $mahasiswa->tampilData(). PHP_EOL;
 $dosen = new Dosen("Prih Diantono Abda`u",123456,"PWEB2");
 
 // Menampilkan data dosen
-echo $dosen->tampilkanData();
+echo $dosen->tampilkanDosen();
