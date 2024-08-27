@@ -4,7 +4,7 @@
 
 Pemrograman Berorientasi Objek (OOP) adalah paradigma pemrograman yang mengorganisasi kode menjadi objek-objek. Objek ini merepresentasikan entitas dunia nyata, seperti mobil, orang, atau bahkan konsep abstrak seperti akun bank. Setiap objek memiliki atribut (data) dan metode (fungsi) yang terkait.
 
-## Konsep Dasar OOP
+## Konsep Dasar OOP 2
 
 Class: Blueprint atau cetak biru untuk membuat objek. Kelas mendefinisikan atribut dan metode yang akan dimiliki oleh objek.
 
@@ -16,12 +16,25 @@ class Mahasiswa {
 ```
 
 Object: Instansi dari sebuah kelas. Setiap objek memiliki nilai atribut yang unik.
+
 ```php
 $mahasiswa = new Mahasiswa("Joni", 230302005, "Teknik Informatika");
 $mahasiswa->tampilkanData();
 
 // Memanggil metode tampilkanData() untuk menampilkan data mahasiswa
 $mahasiswa->tampilkanData();
+
+```
+
+Constructor : Method yang langsung dijalankan saat objed di Instansiasi pertama kali.
+
+```php
+
+public function __construct($nama, $nim, $jurusan){
+        $this->nama = $nama;
+        $this->nim = $nim;
+        $this->jurusan = $jurusan;
+    }
 
 ```
 
@@ -45,170 +58,75 @@ Contoh Lengkap
 
 ```php
 
-class Mahasiswa{
-    public $nama, $nim, $jurusan; // Deklarasi properti publik untuk menyimpan data mahasiswa
+<?php 
+
+class Mahasiswa {
+    private $nama, $nim, $jurusan; // Deklarasi properti private untuk menyimpan data mahasiswa
 
     // Konstruktor untuk menginisialisasi objek Mahasiswa dengan nama, NIM, dan jurusan
     public function __construct($nama, $nim, $jurusan){
-        $this->nama = $nama;  // Mengisi properti $nama dengan nilai parameter $nama
-        $this->nim = $nim;    // Mengisi properti $nim dengan nilai parameter $nim
-        $this->jurusan = $jurusan; // Mengisi properti $jurusan dengan nilai parameter $jurusan
+        $this->nama = $nama;
+        $this->nim = $nim;
+        $this->jurusan = $jurusan;
     }
 
-    // Metode untuk menampilkan data mahasiswa
-    public function tampilkanData(){
-        echo "Nama: $this->nama, NIM: $this->nim, Jurusan: $this->jurusan"; // Mencetak data mahasiswa dalam format string
+    // Metode untuk menampilkan data mahasiswa dalam format string
+    public function tampilData(){
+        return "NAMA : $this->nama, NIM : $this->nim, JURUSAN : $this->jurusan";
+    }
+
+    // Metode untuk mengupdate jurusan mahasiswa
+    public function updateJurusan($jurusan){
+        $this->jurusan = $jurusan;
+    }
+
+    // Metode untuk mengupdate NIM mahasiswa
+    public function setNim($nim){
+        $this->nim = $nim;
+    }
+}
+
+class Dosen{
+    protected $nama, $nip, $matkul; // Deklarasi properti protected untuk menyimpan data dosen
+
+    // Konstruktor untuk menginisialisasi objek Dosen dengan nama, NIP, dan mata kuliah
+    public function __construct($nama, $nip, $matkul){
+        $this->nama = $nama;
+        $this->nip = $nip;
+        $this->matkul = $matkul;
+    }
+
+    // Metode untuk menampilkan data dosen dalam format string
+    public function tampilkanDosen(){
+        return "NAMA : $this->nama, NIP : $this->nip, MATA KULIAH : $this->matkul";
     }
 }
 
 // Membuat objek Mahasiswa dengan nama, NIM, dan jurusan tertentu
+$mahasiswa = new Mahasiswa("Bikra Abna", 230302005, "TI");
+echo $mahasiswa->tampilData() . PHP_EOL; // Menampilkan data mahasiswa
+
+// Mengupdate jurusan mahasiswa
+$mahasiswa->updateJurusan("Sistem Informasi");
+
+// Mengupdate NIM mahasiswa
+$mahasiswa->setNim(230302006);
+
+// Menampilkan data mahasiswa setelah diupdate
+echo $mahasiswa->tampilData(). PHP_EOL;
+
+// Membuat objek Dosen dengan nama, NIP, dan mata kuliah tertentu
+$dosen = new Dosen("Prih Diantono Abda`u",123456,"PWEB2");
+
+// Menampilkan data dosen
+echo $dosen->tampilkanDosen();
 
 ```
 
 Hasil :
 
-//gambar hasil class n object
+![Result Mahasiswa](assets/Mahasiswa.png)
 
-Inheritance: Mekanisme di mana sebuah kelas (kelas anak) mewarisi atribut dan metode dari kelas lain (kelas induk).
-
-```php
-class Pengguna{
-    protected $nama;
-
-    public function __construct(string $nama){
-        $this->nama = $nama;
-    }   
-
-    public function getNama() {
-        return $this->nama  . PHP_EOL;
-    }
-}
-
-class Dosen extends Pengguna{
-    private $matakuliah;
-
-    public function __construct($nama, $matakuliah){
-        parent::__construct($nama);
-        $this->matakuliah = $matakuliah;
-    }
-
-    public function getMatkul(){
-        return $this->matakuliah;
-    }
-}
-```
-
-Hasil :
-
-//gambar hasil Inheritance
-
-Polimorphism: Kemampuan suatu objek untuk mengambil banyak bentuk.
-
-```php
-class Pengguna{
-    // Konstruktor kelas Pengguna
-    public function __construct(){
-
-    }
-
-    // Metode untuk menampilkan fitur yang bisa diakses oleh pengguna
-    public function aksesFitur(){
-        echo "Pengguna Bisa Mengakses Fitur-fitur berikut". PHP_EOL; // Mencetak pesan akses fitur untuk pengguna umum
-    }
-}
-
-class Dosen extends Pengguna{
-    // Konstruktor kelas Dosen
-    public function __construct(){
-
-    }
-
-    // Metode untuk menampilkan fitur yang bisa diakses oleh dosen
-    public function aksesFitur(){
-        echo "Bisa Ngasih Nilai Ke Mahasiswa" . PHP_EOL; // Mencetak pesan akses fitur spesifik untuk dosen
-    }
-}
-
-class Mahasiswa extends Pengguna{
-    // Konstruktor kelas Mahasiswa
-    public function __construct(){
-    
-    }
-
-    // Metode untuk menampilkan fitur yang bisa diakses oleh mahasiswa
-    public function aksesFitur(){
-        echo "Bisa Ngelihat Nilai doang" . PHP_EOL; // Mencetak pesan akses fitur spesifik untuk mahasiswa
-    }
-}
-
-// Membuat array yang berisi objek dari kelas Pengguna, Mahasiswa, dan Dosen
-$users = [new Pengguna(), new Mahasiswa(), new Dosen()];
-
-// Melakukan iterasi pada setiap objek di array $users
-foreach ($users as $user) {
-    $user->aksesFitur(); // Memanggil metode aksesFitur() sesuai dengan kelas dari objek yang bersangkutan
-}
-
-```
-
-Hasil :
-
-//gambar hasil polimorphism
-
-Encaptulation: Membungkus data (atribut) dan metode dalam sebuah kelas, sehingga data terlindungi dari akses langsung.
-
-```php
-private $id;
-public $nama;
-protected function class MyFunction(){
-...
-```
-
-
-Abstraction: Proses menyembunyikan detail implementasi internal dan
-hanya menampilkan fungsionalitas utama kepada pengguna. 
-
-```php
-<?php 
-
-abstract class Pengguna{
-    // Mendefinisikan sebuah metode abstrak yang harus diimplementasikan oleh kelas turunan
-    abstract protected function aksesFitur();
-}
-
-class Mahasiswa extends Pengguna{
-    public function __construct(){
-        // Konstruktor kelas Mahasiswa, saat ini tidak melakukan apapun
-    }
-
-    // Implementasi metode abstrak dari kelas Pengguna
-    public function aksesFitur() {
-        return "Bisa Ngelihat Nilai doang" . PHP_EOL; // Mengembalikan string dengan fitur yang dapat diakses oleh Mahasiswa
-    }
-}
-
-class Dosen extends Pengguna{
-    public function __construct(){
-        // Konstruktor kelas Dosen, saat ini tidak melakukan apapun
-    }
-
-    // Implementasi metode abstrak dari kelas Pengguna
-    public function aksesFitur(){
-        return "Bisa Ngasih Nilai bre" . PHP_EOL; // Mengembalikan string dengan fitur yang dapat diakses oleh Dosen
-    }
-}
-
-$users = [new Mahasiswa(), new Dosen()]; // Membuat array berisi objek Mahasiswa dan Dosen
-
-foreach ($users as $user) {
-    echo $user->aksesFitur(); // Memanggil metode aksesFitur() untuk setiap objek dan mencetak hasilnya
-}
-
-```
-
-Hasil :
-
-//gambar abstrak class
 
 ## Penerapan OOP dalam PHP
 

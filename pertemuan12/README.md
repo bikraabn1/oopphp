@@ -168,18 +168,22 @@ Hasil :
 
 ![Hasil Code Class dan Object](assets/Polymorphism.png)
 
-Encaptulation: Membungkus data (atribut) dan metode dalam sebuah kelas, sehingga data terlindungi dari akses langsung.
+Enkapsulasi: Konsep dalam pemrograman berorientasi objek yang membungkus data (properti) dan metode (fungsi) dalam satu unit yang disebut kelas.
+Visibilitas: Tingkat aksesibilitas suatu anggota kelas (properti atau metode) dari bagian lain dari program. Terdiri dari public, protected, dan private.
+Aksesibilitas: Kemampuan suatu bagian dari kode untuk mengakses bagian lain.
 
 ```php
+class Mobil {
 private $id;
 public $nama;
-protected function class MyFunction(){
-...
+    protected function MyFunction(){
+        ...
+    }
+}
 ```
 
 
-Abstraction: Proses menyembunyikan detail implementasi internal dan
-hanya menampilkan fungsionalitas utama kepada pengguna. 
+Abstraction: Proses menyembunyikan detail implementasi internal dan hanya menampilkan fungsionalitas utama kepada pengguna. 
 
 ```php
 <?php 
