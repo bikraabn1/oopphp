@@ -199,6 +199,26 @@ class OfflineCourse extends Course{
     }
 }
 
+abstract class Jurnal{
+    // Method abstract yang harus diimplementasikan oleh class turunannya.
+    abstract function caraPengajuan();
+}
+
+class JurnalDosen extends Jurnal{
+    // Implementasi method caraPengajuan untuk jurnal dosen.
+    public function caraPengajuan(){
+        return "Di Ajukan Ke Negara";
+    }
+
+} 
+
+class JurnalMahasiswa extends Jurnal{
+    // Implementasi method caraPengajuan untuk jurnal mahasiswa.
+    public function caraPengajuan(){
+        return "Di Ajukan Ke Fakultas";
+    }
+}
+
 // Membuat objek Student dan menampilkan informasi terkait.
 echo "STUDENT" . PHP_EOL;
 
@@ -254,4 +274,12 @@ $dosen->setNidn(999);
 echo $dosen->getName();
 echo $dosen->getRole();
 echo $dosen->getNIDN() . PHP_EOL;
+
+
+//Perulangan untuk menginstansiasi tiap class
+$jurnal = [new JurnalDosen(), new JurnalMahasiswa()];
+
+foreach($jurnal as $data){
+    echo $data->caraPengajuan() . PHP_EOL;
+}
 
